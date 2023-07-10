@@ -11,7 +11,7 @@ const emailInput = document.querySelector("#email-input");
 const passwordInput = document.querySelector("#password-input");
 const registerBtn = document.querySelector("#submit-btn");
 
-firstNameInput.onkeyup = (event) => {
+firstNameInput.onkeyup = () => {
   firstNameInput.classList.remove("is-valid");
   firstNameInput.classList.remove("is-invalid");
 };
@@ -32,35 +32,39 @@ passwordInput.onkeyup = () => {
 };
 
 registerBtn.onclick = () => {
-  let isFirstNameOk = true;
-  let isLastNameOk = true;
-  let isEmailOk = true;
-  let isPasswordOk = true;
+  let isFirstName = false;
+  let isLastName = false;
+  let isEmail = false;
+  let isPassword = false;
 
   if (firstNameInput.value === "") {
     firstNameInput.classList.add("is-invalid");
+  } else {
     firstNameInput.classList.add("is-valid");
-    isFirstNameOk = false;
+    isFirstName = true;
   }
   if (lastNameInput.value === "") {
     lastNameInput.classList.add("is-invalid");
+  } else {
     lastNameInput.classList.add("is-valid");
-    isLastNameOk = false;
+    isLastName = true;
   }
 
   if (validateEmail(emailInput.value) === false) {
     emailInput.classList.add("is-invalid");
+  } else {
     emailInput.classList.add("is-valid");
-    isEmailOk = false;
+    isEmail = true;
   }
 
-  if (passwordInput.value.length <= 6) {
+  if (passwordInput.value.length >= 6) {
     passwordInput.classList.add("is-valid");
+  } else {
     passwordInput.classList.add("is-invalid");
-    isPasswordOk = false;
+    isPassword = true;
   }
 
-  if (isFirstNameOk && isLastNameOk && isEmailOk && isPasswordOk) {
+  if (isFirstName && isLastName && isEmail && isPassword) {
     alert("Registered successfully");
   }
 };
